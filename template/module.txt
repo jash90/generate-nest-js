@@ -1,0 +1,13 @@
+import { DatabaseModule } from "../database/database.module";
+import { Module } from "@nestjs/common";
+import { <%= UpperCaseName %>Controller } from "./<%= Name %>s.controller";
+import { <%= UpperCaseName %>Service } from "./<%= Name %>s.service";
+import { <%= Name %>Providers } from "./<%= Name %>s.providers";
+
+@Module({
+    imports: [DatabaseModule],
+    controllers: [<%= UpperCaseName %>Controller],
+    providers: [<%= UpperCaseName %>Service, ...<%= Name %>Providers],
+    exports: []
+})
+export class <%= UpperCaseName %>Module {}

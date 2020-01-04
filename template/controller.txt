@@ -1,0 +1,81 @@
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    ParseIntPipe,
+    Post,
+    Put,
+    UseGuards
+} from "@nestjs/common";
+import {
+    ApiBearerAuth,
+    ApiCreatedResponse,
+    ApiImplicitParam,
+    ApiOkResponse,
+    ApiUseTags
+} from "@nestjs/swagger";
+import { AuthGuard } from "@nestjs/passport";
+import { <%= UpperCaseName %>Dto } from "./dto/<%= Name %>.dto";
+import { Create<%= UpperCaseName %>Dto } from "./dto/create-<%= Name %>.dto";
+import { Update<%= UpperCaseName %>Dto } from "./dto/update-<%= Name %>.dto";
+import { <%= UpperCaseName %>Offset } from "./dto/<%= Name %>.offset";
+import { <%= UpperCaseName %> } from "./<%= Name %>.entity";
+import { <%= UpperCaseName %>Service } from "./<%= Name %>s.service";
+
+@Controller("<%= Name %>s")
+@ApiUseTags("<%= Name %>s")
+export class <%= UpperCaseName %>Controller {
+    constructor(private readonly <%= Name %>sService: <%= UpperCaseName %>Service) {}
+
+    @Get()
+    @ApiOkResponse({ type: [<%= UpperCaseName %>Dto] })
+    findAll(): Promise<<%= UpperCaseName %>Dto[]> {
+        return this.<%= Name %>sService.findAll();
+    }
+
+    @Get(":id")
+    @ApiOkResponse({ type: <%= UpperCaseName %>Dto })
+    @ApiImplicitParam({ name: "id", required: true })
+    findOne(@Param("id", new ParseIntPipe()) id: number): Promise<<%= UpperCaseName %>Dto> {
+        return this.<%= Name %>sService.findOne(id);
+    }
+
+    @Post()
+    @ApiCreatedResponse({ type: <%= UpperCaseName %> })
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard("jwt"))
+    create(@Body() createDto: Create<%= UpperCaseName %>Dto): Promise<<%= UpperCaseName %>> {
+        return this.<%= Name %>sService.create(createDto);
+    }
+
+    @Put(":id")
+    @ApiOkResponse({ type: <%= UpperCaseName %> })
+    @ApiImplicitParam({ name: "id", required: true })
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard("jwt"))
+    update(
+        @Param("id", new ParseIntPipe()) id: number,
+        @Body() UpdateDto: Update<%= UpperCaseName %>Dto
+    ): Promise<<%= UpperCaseName %>> {
+        return this.<%= Name %>sService.update(id, UpdateDto);
+    }
+
+    @Delete(":id")
+    @ApiOkResponse({ type: <%= UpperCaseName %> })
+    @ApiImplicitParam({ name: "id", required: true })
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard("jwt"))
+    delete(@Param("id", new ParseIntPipe()) id: number): Promise<<%= UpperCaseName %>> {
+        return this.<%= Name %>sService.delete(id);
+    }
+
+    @Get(":id")
+    @ApiOkResponse({ type: <%= UpperCaseName %>Offset })
+    offset(
+        @Param("id", new ParseIntPipe()) index: number = 0
+    ): Promise<<%= UpperCaseName %>Offset> {
+        return this.<%= Name %>sService.offset(index);
+    }
+}

@@ -1,0 +1,5 @@
+import { <%= UpperCaseName %> } from "./<%= Name %>.entity";
+
+export const <%= Name %>Providers = [
+    { provide: "<%= UpperCaseName %>sRepository", useValue: <%= UpperCaseName %> }
+];

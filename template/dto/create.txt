@@ -1,0 +1,6 @@
+import { ApiModelProperty } from "@nestjs/swagger";
+import { <%= CreateParametersDecorators %> } from "class-validator";
+
+export class Create<%= UpperCaseName %>Dto {
+<%= CreateParameters %>
+}

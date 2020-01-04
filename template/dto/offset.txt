@@ -1,0 +1,14 @@
+import { ApiModelProperty } from "@nestjs/swagger";
+import { <%= UpperCaseName %>Dto } from "./<%= Name %>.dto";
+
+export class <%= UpperCaseName %>Offset {
+    @ApiModelProperty()
+    readonly rows: <%= UpperCaseName %>Dto[];
+    @ApiModelProperty()
+    readonly count: number;
+
+    constructor(<%= Name %>Offset: <%= UpperCaseName %>Offset) {
+        this.rows = <%= Name %>Offset.rows;
+        this.count = <%= Name %>Offset.count;
+    }
+}

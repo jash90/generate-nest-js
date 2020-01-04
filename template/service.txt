@@ -1,0 +1,94 @@
+import { HttpException, HttpStatus, Inject, Injec<%= Name %> } from "@nestjs/common";
+import { <%= UpperCaseName %> } from "../<%= Name %>/<%= Name %>.entity";
+import { <%= UpperCaseName %>Dto } from "../<%= Name %>/dto/<%= Name %>.dto";
+import { Create<%= UpperCaseName %>Dto } from "../<%= Name %>/dto/create-<%= Name %>.dto";
+import { Update<%= UpperCaseName %>Dto } from "../<%= Name %>/dto/update-<%= Name %>.dto";
+import { <%= UpperCaseName %>Offset } from "../<%= Name %>/dto/<%= Name %>.offset";
+
+@Injec<%= Name %>()
+export class <%= UpperCaseName %>Service {
+    constructor(
+        @Inject("<%= UpperCaseName %>sRepository")
+        private readonly <%= Name %>sRepository: typeof <%= UpperCaseName %>
+    ) {}
+
+    async findAll(): Promise<<%= UpperCaseName %>Dto[]> {
+        const <%= Name %>s = await this.<%= Name %>sRepository.findAll<<%= UpperCaseName %>>({
+            include: [],
+            attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
+        return <%= Name %>s.map(<%= Name %> => {
+            return new <%= UpperCaseName %>Dto(<%= Name %>);
+        });
+    }
+
+    async findOne(id: number): Promise<<%= UpperCaseName %>Dto> {
+        const <%= Name %> = await this.<%= Name %>sRepository.findByPk<<%= UpperCaseName %>>(id, {
+            include: [],
+            attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
+        if (!<%= Name %>) {
+            throw new HttpException("No <%= Name %> found", HttpStatus.NOT_FOUND);
+        }
+
+        return new <%= UpperCaseName %>Dto(<%= Name %>);
+    }
+
+    async create(CreateDto: Create<%= UpperCaseName %>Dto): Promise<<%= UpperCaseName %>> {
+        const <%= Name %> = new <%= UpperCaseName %>();
+       
+        <%= CreateService %>
+
+        try {
+            return await <%= Name %>.save();
+        } catch (err) {
+            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private async get<%= UpperCaseName %>(id: number): Promise<<%= UpperCaseName %>> {
+        const <%= Name %> = await this.<%= Name %>sRepository.findByPk<<%= UpperCaseName %>>(id, {
+            include: [],
+            attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
+        if (!<%= Name %>) {
+            throw new HttpException("No <%= Name %> found", HttpStatus.NOT_FOUND);
+        }
+
+        return <%= Name %>;
+    }
+
+    async update(id: number, UpdateDto: Update<%= UpperCaseName %>Dto): Promise<<%= UpperCaseName %>> {
+        const <%= Name %> = await this.get<%= UpperCaseName %>(id);
+
+        <%= UpdateService %>
+
+        try {
+            return await <%= Name %>.save();
+        } catch (err) {
+            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async delete(id: number): Promise<<%= UpperCaseName %>> {
+        const <%= Name %> = await this.get<%= UpperCaseName %>(id);
+        await <%= Name %>.destroy();
+        return <%= Name %>;
+    }
+
+    async offset(index: number = 0): Promise<<%= UpperCaseName %>Offset> {
+        const <%= Name %>s = await this.<%= Name %>sRepository.findAndCountAll({
+            include: [],
+            limit: 100,
+            offset: index * 100,
+            order: ["id"],
+            attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] }
+        });
+
+        const <%= UpperCaseName %>Dto = <%= Name %>s.rows.map(privilege => {
+            return new <%= UpperCaseName %>Dto(privilege);
+        });
+
+        return { rows: <%= UpperCaseName %>Dto, count: <%= UpperCaseName %>Dto.count };
+    }
+}

@@ -1,0 +1,10 @@
+import { ApiModelProperty } from "@nestjs/swagger";
+import { <%= UpperCaseName %> } from "../<%= Name %>.entity";
+
+export class TableDto {
+    <%= DtoParameters %> 
+
+    constructor(<%= Name %>: <%= UpperCaseName %>) {
+        <%= DtoAssign %>
+    }
+}
