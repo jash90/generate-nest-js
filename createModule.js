@@ -132,7 +132,7 @@ const createModule = async (name, variable) => {
 
             await util.createFile(
                 "template/controller.txt",
-                `generated/${name}/${name}s.controller.ts`,
+                `generated/${name}/${name}s.service.ts`,
                 name,
                 "Service",
                 [
