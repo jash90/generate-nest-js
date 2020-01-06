@@ -1,0 +1,24 @@
+[
+    {
+        "name": "flatRoom",
+        "variable" : [
+            {
+                "name": "flatId",
+                "type": "number",
+                "decorators": ["@IsNumber()"],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            },
+            {
+                "name": "roomId",
+                "type": "number",
+                "decorators": ["@IsNumber()"],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        
+        ]
+    }
+]

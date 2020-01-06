@@ -23,7 +23,7 @@ export class <%= UpperCaseName %> extends Model<<%= UpperCaseName %>> {
     @AutoIncrement
     @Column(DataType.BIGINT)
     id: number;
-<%= EnityParameters %>
+<%= EntityParameters %>
     @CreatedAt
     @Column({ field: "createdAt" })
     createdAt: Date;

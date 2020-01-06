@@ -125,7 +125,7 @@ const replaceAllName = (text, name) => {
 const createDir = async path => {
     const status = await exists(path);
     if (!status) await mkdir(path, 0o777);
-    console.log(`Folder ${path} created successfull.`);
+    console.log(`Folder ${path} created successful.`);
 };
 
 const createFile = async (template, filename, name, type, replaces = []) => {
@@ -138,7 +138,7 @@ const createFile = async (template, filename, name, type, replaces = []) => {
         });
 
         await writeFile(filename, text);
-        console.log(`${type} is created successfull. ${filename}`);
+        console.log(`${type} is created successful. ${filename}`);
     });
 };
 
