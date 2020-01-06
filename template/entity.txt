@@ -10,7 +10,7 @@ import {
     Length,
     Model,
     PrimaryKey,
-    Table
+    Table,
     Unique,
     UpdatedAt
 } from "sequelize-typescript";

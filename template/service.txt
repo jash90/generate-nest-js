@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Inject, Injec<%= Name %> } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { <%= UpperCaseName %> } from "../<%= Name %>/<%= Name %>.entity";
 import { <%= UpperCaseName %>Dto } from "../<%= Name %>/dto/<%= Name %>.dto";
 import { Create<%= UpperCaseName %>Dto } from "../<%= Name %>/dto/create-<%= Name %>.dto";
 import { Update<%= UpperCaseName %>Dto } from "../<%= Name %>/dto/update-<%= Name %>.dto";
 import { <%= UpperCaseName %>Offset } from "../<%= Name %>/dto/<%= Name %>.offset";
 
-@Injec<%= Name %>()
+@Injectable()
 export class <%= UpperCaseName %>Service {
     constructor(
         @Inject("<%= UpperCaseName %>sRepository")
