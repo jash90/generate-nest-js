@@ -71,7 +71,7 @@ export class <%= UpperCaseName %>Controller {
         return this.<%= Name %>sService.delete(id);
     }
 
-    @Get(":id")
+    @Get("offset/:id")
     @ApiOkResponse({ type: <%= UpperCaseName %>Offset })
     offset(
         @Param("id", new ParseIntPipe()) index: number = 0
