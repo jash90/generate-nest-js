@@ -21,7 +21,7 @@ const createParameters = (variable, update = false, dto = false) => {
         if (element.isOptional && update) {
             temp += `@IsOptional()\n`;
         }
-        temp += `readonly ${element.name}: ${element.type};\n`;
+        temp += `readonly ${element.name}${element.isOptional && update?"?":""}: ${element.type};\n`;
     });
     return temp;
 };

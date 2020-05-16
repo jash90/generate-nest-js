@@ -1,6 +1,6 @@
 const util = require("./util");
 
-createStructure = async (name) => {
+createStructure = async name => {
     await util.createDir(`generated`);
     await util.createDir(`generated/${name}`);
     await util.createDir(`generated/${name}/dto`);
@@ -23,150 +23,147 @@ const createModule = async (name, variable) => {
 
     const DtoAssign = util.dtoAssign(variable, name);
 
-    // validate
+    try {
+        // validate
 
-    util.validate(variable);
+        await util.validate(variable);
 
-    // create structure
+        // create structure
 
-    createStructure(name);
+        await createStructure(name);
+        // create create-name.dto.ts file
 
-    createStructure().then(async () => {
-        try {
-            // create create-name.dto.ts file
+        await util.createFile(
+            "template/dto/create.txt",
+            `generated/${name}/dto/create-${name}.dto.ts`,
+            name,
+            "Create DTO",
+            [
+                {
+                    key: "<%= CreateParameters %>",
+                    value: CreateParameters
+                },
+                {
+                    key: "<%= CreateParametersDecorators %>",
+                    value: CreateParametersDecorators
+                }
+            ]
+        );
 
-            await util.createFile(
-                "template/dto/create.txt",
-                `generated/${name}/dto/create-${name}.dto.ts`,
-                name,
-                "Create DTO",
-                [
-                    {
-                        key: "<%= CreateParameters %>",
-                        value: CreateParameters
-                    },
-                    {
-                        key: "<%= CreateParametersDecorators %>",
-                        value: CreateParametersDecorators
-                    }
-                ]
-            );
+        // create update-name.dto.ts file
 
-            // create update-name.dto.ts file
+        await util.createFile(
+            "template/dto/update.txt",
+            `generated/${name}/dto/update-${name}.dto.ts`,
+            name,
+            "Update DTO",
+            [
+                {
+                    key: "<%= UpdateParameters %>",
+                    value: UpdateParameters
+                },
+                {
+                    key: "<%= UpdateParametersDecorators %>",
+                    value: UpdateParametersDecorators
+                }
+            ]
+        );
 
-            await util.createFile(
-                "template/dto/update.txt",
-                `generated/${name}/dto/update-${name}.dto.ts`,
-                name,
-                "Update DTO",
-                [
-                    {
-                        key: "<%= UpdateParameters %>",
-                        value: UpdateParameters
-                    },
-                    {
-                        key: "<%= UpdateParametersDecorators %>",
-                        value: UpdateParametersDecorators
-                    }
-                ]
-            );
+        // create name.offset.ts file
 
-            // create name.offset.ts file
+        await util.createFile(
+            "template/dto/offset.txt",
+            `generated/${name}/dto/${name}.offset.ts`,
+            name,
+            "Offset"
+        );
 
-            await util.createFile(
-                "template/dto/offset.txt",
-                `generated/${name}/dto/${name}.offset.ts`,
-                name,
-                "Offset"
-            );
+        // create name.dto.ts file
 
-            // create name.dto.ts file
+        await util.createFile(
+            "template/dto/dto.txt",
+            `generated/${name}/dto/${name}.dto.ts`,
+            name,
+            "Model DTO",
+            [
+                {
+                    key: "<%= DtoParameters %>",
+                    value: DtoParameters
+                },
+                {
+                    key: "<%= DtoAssign %>",
+                    value: DtoAssign
+                }
+            ]
+        );
 
-            await util.createFile(
-                "template/dto/dto.txt",
-                `generated/${name}/dto/${name}.dto.ts`,
-                name,
-                "Model DTO",
-                [
-                    {
-                        key: "<%= DtoParameters %>",
-                        value: DtoParameters
-                    },
-                    {
-                        key: "<%= DtoAssign %>",
-                        value: DtoAssign
-                    }
-                ]
-            );
+        console.log("\nModels created successful.\n");
 
-            console.log("\nModels created successful.\n");
+        // create names.providers.ts file
 
-            // create names.providers.ts file
+        await util.createFile(
+            "template/providers.txt",
+            `generated/${name}/${name}s.providers.ts`,
+            name,
+            "Providers"
+        );
 
-            await util.createFile(
-                "template/providers.txt",
-                `generated/${name}/${name}s.providers.ts`,
-                name,
-                "Providers"
-            );
+        // create names.module.ts file
 
-            // create names.module.ts file
+        await util.createFile(
+            "template/module.txt",
+            `generated/${name}/${name}s.module.ts`,
+            name,
+            "Module"
+        );
 
-            await util.createFile(
-                "template/module.txt",
-                `generated/${name}/${name}s.module.ts`,
-                name,
-                "Module"
-            );
+        // create names.controller.ts file
 
-            // create names.controller.ts file
+        await util.createFile(
+            "template/controller.txt",
+            `generated/${name}/${name}s.controller.ts`,
+            name,
+            "Controller"
+        );
 
-            await util.createFile(
-                "template/controller.txt",
-                `generated/${name}/${name}s.controller.ts`,
-                name,
-                "Controller"
-            );
+        // create names.service.ts file
 
-            // create names.controller.ts file
+        await util.createFile(
+            "template/service.txt",
+            `generated/${name}/${name}s.service.ts`,
+            name,
+            "Service",
+            [
+                {
+                    key: "<%= CreateService %>",
+                    value: util.createService(variable, name)
+                },
+                {
+                    key: "<%= UpdateService %>",
+                    value: util.createService(variable, name, true)
+                }
+            ]
+        );
 
-            await util.createFile(
-                "template/controller.txt",
-                `generated/${name}/${name}s.service.ts`,
-                name,
-                "Service",
-                [
-                    {
-                        key: "<%= CreateService %>",
-                        value: util.createService(variable, name)
-                    },
-                    {
-                        key: "<%= UpdateService %>",
-                        value: util.createService(variable, name, true)
-                    }
-                ]
-            );
+        // create names.entity.ts file
 
-            // create names.controller.ts file
+        await util.createFile(
+            "template/entity.txt",
+            `generated/${name}/${name}.entity.ts`,
+            name,
+            "Entity",
+            [
+                {
+                    key: "<%= EntityParameters %>",
+                    value: util.entityParameters(variable)
+                }
+            ]
+        );
 
-            await util.createFile(
-                "template/entity.txt",
-                `generated/${name}/${name}.entity.ts`,
-                name,
-                "Entity",
-                [
-                    {
-                        key: "<%= EntityParameters %>",
-                        value: util.entityParameters(variable)
-                    }
-                ]
-            );
-
-            console.log("\nService created successful.\n");
-        } catch (error) {
-            throw error;
-        }
-    });
+        console.log("\nService created successful.\n");
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = { createModule };

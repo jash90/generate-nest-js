@@ -1,11 +1,13 @@
 [
     {
         "name": "flatRoom",
-        "variable" : [
+        "variable": [
             {
                 "name": "flatId",
                 "type": "number",
-                "decorators": ["@IsNumber()"],
+                "decorators": [
+                    "@IsNumber()"
+                ],
                 "column": "@Column(DataType.BIGINT)",
                 "parameters": [],
                 "isOptional": true
@@ -13,12 +15,203 @@
             {
                 "name": "roomId",
                 "type": "number",
-                "decorators": ["@IsNumber()"],
+                "decorators": [
+                    "@IsNumber()"
+                ],
                 "column": "@Column(DataType.BIGINT)",
                 "parameters": [],
                 "isOptional": true
             }
-        
+        ]
+    },
+    {
+        "name": "roomControl",
+        "variable": [
+            {
+                "name": "roomId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            },
+            {
+                "name": "controlId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        ]
+    },
+    {
+        "name": "flat",
+        "variable": [
+            {
+                "name": "name",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [
+                    "@Unique(true)"
+                ],
+                "isOptional": true
+            },
+            {
+                "name": "userId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        ]
+    },
+    {
+        "name": "room",
+        "variable": [
+            {
+                "name": "name",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [
+                    "@Unique(true)"
+                ],
+                "isOptional": true
+            },
+            {
+                "name": "userId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        ]
+    },
+    {
+        "name": "control",
+        "variable": [
+            {
+                "name": "name",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [
+                    "@Unique(true)"
+                ],
+                "isOptional": true
+            },
+            {
+                "name": "value",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [],
+                "isOptional": true
+            },
+            {
+                "name": "typeId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            },
+            {
+                "name": "userId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        ]
+    },
+    {
+        "name": "type",
+        "variable": [
+            {
+                "name": "name",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [
+                    "@Unique(true)"
+                ],
+                "isOptional": true
+            },
+            {
+                "name": "values",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [],
+                "isOptional": true
+            }
+        ]
+    },
+    {
+        "name": "condition",
+        "variable": [
+            {
+                "name": "name",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [
+                    "@Unique(true)"
+                ],
+                "isOptional": true
+            },
+            {
+                "name": "value",
+                "type": "string",
+                "decorators": [
+                    "@IsString()"
+                ],
+                "column": "@Column(DataType.TEXT)",
+                "parameters": [],
+                "isOptional": true
+            },
+            {
+                "name": "userId",
+                "type": "number",
+                "decorators": [
+                    "@IsNumber()"
+                ],
+                "column": "@Column(DataType.BIGINT)",
+                "parameters": [],
+                "isOptional": true
+            }
         ]
     }
 ]
